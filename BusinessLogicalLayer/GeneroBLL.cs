@@ -15,9 +15,6 @@ namespace BusinessLogicalLayer
     /// </summary>
     public class GeneroBLL : IEntityCRUD<Genero>
     {
-
-        private GeneroDAL dal = new GeneroDAL();
-
         public Response Insert(Genero item)
         {
             Response response = Validate(item);
@@ -27,33 +24,71 @@ namespace BusinessLogicalLayer
                 return response;
             }
 
-            return dal.Insert(item);
-        
-        }
-        public Response Update(Genero item)
-        {
-            Response response = Validate(item);
-            if (response.Erros.Count > 0)
+            try
             {
+                using (LocacaoDbContext ctx = new LocacaoDbContext())
+                {
+                    ctx.Generos.Add(item);
+                    ctx.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.Erros.Add("Não foi possível cadastrar o gênero");
                 response.Sucesso = false;
                 return response;
             }
 
-            return dal.Update(item);
+            return response;
+
+        }
+        public Response Update(Genero item)
+        {
+            Response response = new Response();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+
+                    ctx.Entry<Genero>(item).State = System.Data.Entity.EntityState.Deleted;
+                    ctx.SaveChanges();
+
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi possível atualizar o cadastro do gênero");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+
+            }
         }
         public Response Delete(int id)
         {
             Response response = new Response();
-            if (id <= 0)
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
             {
-                response.Erros.Add("ID do cliente não foi informado.");
-            }
-            if (response.Erros.Count != 0)
-            {
-                response.Sucesso = false;
+                try
+                {
+                    Genero g = new Genero();
+                    g.ID = id;
+                    ctx.Entry<Cliente>(g).State = System.Data.Entity.EntityState.Deleted;
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi possível deletar o cadastro do gênero");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
                 return response;
             }
-            return dal.Delete(id);
         }
 
         public DataResponse<Genero> GetData()

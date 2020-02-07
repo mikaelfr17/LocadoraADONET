@@ -11,7 +11,6 @@ namespace BusinessLogicalLayer
 {
     public class FuncionarioBLL : IEntityCRUD<Funcionario>, IFuncionarioService
     {
-        private FuncionarioDAL funcionarioDAL = new FuncionarioDAL();
 
         public DataResponse<Funcionario> Autenticar(string email, string senha)
         {
@@ -31,21 +30,30 @@ namespace BusinessLogicalLayer
                 User.FuncionarioLogado = response.Data[0];
             }
             return response;
-        }
+        }//VERIFICAR MAIS TARDE
 
         public Response Delete(int id)
         {
             Response response = new Response();
-            if (id <= 0)
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
             {
-                response.Erros.Add("ID do filme não foi informado.");
-            }
-            if (response.Erros.Count != 0)
-            {
-                response.Sucesso = false;
+                try
+                {
+                    Funcionario func = new Funcionario();
+                    func.ID = id;
+                    ctx.Entry<Funcionario>(func).State = System.Data.Entity.EntityState.Deleted;
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi possível deletar o cadastro do funcionario");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
                 return response;
             }
-            return funcionarioDAL.Delete(id);
         }
 
         public DataResponse<Funcionario> GetByID(int id)
@@ -61,40 +69,54 @@ namespace BusinessLogicalLayer
         public Response Insert(Funcionario item)
         {
             Response response = Validate(item);
-
-            if (response.HasErrors())
+            if (response.Erros.Count > 0)
             {
                 response.Sucesso = false;
                 return response;
             }
 
-            item.EhAtivo = true;
-            item.Senha = HashUtils.HashPassword(item.Senha);
-            return funcionarioDAL.Insert(item);
+            try
+            {
+                using (LocacaoDbContext ctx = new LocacaoDbContext())
+                {
+                    ctx.Funcionarios.Add(item);
+                    ctx.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.Erros.Add("Não foi possível cadastrar o funcionario");
+                response.Sucesso = false;
+                return response;
+            }
+
+            return response;
         }
 
         public Response Update(Funcionario item)
         {
             Response response = new Response();
 
-            if (string.IsNullOrWhiteSpace(item.CPF))
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
             {
-                response.Erros.Add("O cpf deve ser informado");
-            }
-            else
-            {
-                item.CPF = item.CPF.Trim();
-                if (!item.CPF.IsCpf())
+                try
                 {
-                    response.Erros.Add("O cpf informado é inválido.");
+
+                    ctx.Entry<Funcionario>(item).State = System.Data.Entity.EntityState.Deleted;
+                    ctx.SaveChanges();
+
                 }
-            }
-            if (response.HasErrors())
-            {
-                response.Sucesso = false;
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi possível atualizar o cadastro do filme");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
                 return response;
+
             }
-            return funcionarioDAL.Update(item);
         }
         private Response Validate(Funcionario item)
         {

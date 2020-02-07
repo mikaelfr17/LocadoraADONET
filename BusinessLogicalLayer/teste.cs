@@ -1,57 +1,17 @@
-﻿using DataAccessLayer;
-using Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer
 {
-    /// <summary>
-    /// Classe responsável pelas regras de negócio 
-    /// da entidade Gênero.
-    /// </summary>
-    public class ClienteBLL : IEntityCRUD<Cliente>
+    class teste
     {
-        public Response Delete(int id)
-        {
-            Response response = new Response();
-
-            using (LocacaoDbContext ctx = new LocacaoDbContext())
-            {
-                try
-                {
-                    Cliente c = new Cliente();
-                    c.ID = id;
-                    ctx.Entry<Cliente>(c).State = System.Data.Entity.EntityState.Deleted;
-                    ctx.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    response.Erros.Add("Não foi possível deletar o cadastro do cliente");
-                    response.Sucesso = false;
-                    return response;
-                }
-                response.Sucesso = true;
-                return response;
-            }
-        }
-
-        public DataResponse<Cliente> GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public DataResponse<Cliente> GetData()
-        {
-            throw new NotImplementedException();
-        }
-
         public Response Insert(Cliente item)
         {
             Response response = Validate(item);
+            //Se encontramos erros de validação, retorne-os!
             if (response.Erros.Count > 0)
             {
                 response.Sucesso = false;
@@ -77,30 +37,7 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-        public Response Update(Cliente item)
-        {
-            Response response = new Response();
-
-            using (LocacaoDbContext ctx = new LocacaoDbContext())
-            {
-                try
-                {
-
-                    ctx.Entry<Cliente>(item).State = System.Data.Entity.EntityState.Deleted;
-                    ctx.SaveChanges();
-
-                }
-                catch (Exception ex)
-                {
-                    response.Erros.Add("Não foi possível deletar o cadastro do cliente");
-                    response.Sucesso = false;
-                    return response;
-                }
-                response.Sucesso = true;
-                return response;
-
-            }
-        }
+        //fsodfosdjaklgjfsdjagfjçgjdf
 
         private Response Validate(Cliente item)
         {
@@ -139,6 +76,3 @@ namespace BusinessLogicalLayer
         }
     }
 }
-
-
-

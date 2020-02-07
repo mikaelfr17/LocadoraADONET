@@ -61,6 +61,7 @@
     <Compile Include="Security\HashUtils.cs" />
     <Compile Include="Security\SenhaValidator.cs" />
     <Compile Include="Security\User.cs" />
+    <Compile Include="teste.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">

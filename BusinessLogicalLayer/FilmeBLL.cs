@@ -12,94 +12,111 @@ namespace BusinessLogicalLayer
 {
     public class FilmeBLL : IEntityCRUD<Filme>, IFilmeService
     {
-        private FilmeDAL filmeDAL = new FilmeDAL();
-
         public Response Delete(int id)
         {
             Response response = new Response();
-            if (id<= 0)
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
             {
-                response.Erros.Add("ID do filme não foi informado.");
-            }
-            if (response.Erros.Count != 0)
-            {
-                response.Sucesso = false;
+                try
+                {
+                    Filme f = new Filme();
+                    f.ID = id;
+                    ctx.Entry<Filme>(f).State = System.Data.Entity.EntityState.Deleted;
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi possível deletar o cadastro do filme");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
                 return response;
             }
-            return filmeDAL.Delete(id);
         }
 
         public DataResponse<Filme> GetByID(int id)
         {
-            return filmeDAL.GetByID(id);
+            throw new NotImplementedException();
         }
 
         public DataResponse<Filme> GetData()
         {
-            return filmeDAL.GetData();
+            throw new NotImplementedException();
         }
 
         public DataResponse<FilmeResultSet> GetFilmes()
         {
-            return filmeDAL.GetFilmes();
+            throw new NotImplementedException();
         }
 
         public DataResponse<FilmeResultSet> GetFilmesByClassificacao(Classificacao classificacao)
         {
-            return filmeDAL.GetFilmesByClassificacao(classificacao);
+            throw new NotImplementedException();
         }
 
         public DataResponse<FilmeResultSet> GetFilmesByGenero(int genero)
         {
-            if (genero <= 0)
-            {
-                DataResponse<FilmeResultSet> response = new DataResponse<FilmeResultSet>();
-                response.Sucesso = false;
-                response.Erros.Add("Gênero deve ser informado.");
-                return response;
-            }
-            return filmeDAL.GetFilmesByGenero(genero);
+            throw new NotImplementedException();
         }
 
         public DataResponse<FilmeResultSet> GetFilmesByName(string nome)
         {
-            if (string.IsNullOrWhiteSpace(nome))
-            {
-                DataResponse<FilmeResultSet> response = new DataResponse<FilmeResultSet>();
-                response.Sucesso = false;
-                response.Erros.Add("Nome deve ser informado.");
-                return response;
-            }
-            nome = nome.Trim();
-            return filmeDAL.GetFilmesByName(nome);
+            throw new NotImplementedException();
         }
 
         public Response Insert(Filme item)
         {
             Response response = Validate(item);
-            //TODO: Verificar a existência desse gênero na base de dados
-            //generoBLL.LerID(item.GeneroID);
-
-            //Verifica se tem erros!
-            if (response.Erros.Count != 0)
+            if (response.Erros.Count > 0)
             {
                 response.Sucesso = false;
                 return response;
             }
-            return filmeDAL.Insert(item);
+
+            try
+            {
+                using (LocacaoDbContext ctx = new LocacaoDbContext())
+                {
+                    ctx.Filmes.Add(item);
+                    ctx.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.Erros.Add("Não foi possível cadastrar o filme");
+                response.Sucesso = false;
+                return response;
+            }
+
+            return response;
         }
+
         public Response Update(Filme item)
         {
-           Response response = Validate(item);
-            //TODO: Verificar a existência desse gênero na base de dados
-            //generoBLL.LerID(item.GeneroID);
-            //Verifica se tem erros!
-            if (response.Erros.Count != 0)
+            Response response = new Response();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
             {
-                response.Sucesso = false;
+                try
+                {
+
+                    ctx.Entry<Filme>(item).State = System.Data.Entity.EntityState.Deleted;
+                    ctx.SaveChanges();
+
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi possível atualizar o cadastro do filme");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
                 return response;
+
             }
-            return filmeDAL.Update(item);
         }
 
         private Response Validate(Filme item)
