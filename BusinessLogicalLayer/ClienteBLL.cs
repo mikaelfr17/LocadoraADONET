@@ -15,7 +15,6 @@ namespace BusinessLogicalLayer
     /// </summary>
     public class ClienteBLL : IEntityCRUD<Cliente>
     {
-        private ClienteDAL dal = new ClienteDAL();
         public Response Insert(Cliente item)
         {
             Response response = Validate(item);
@@ -26,11 +25,21 @@ namespace BusinessLogicalLayer
                 return response;
             }
 
-            //Se chegou aqui, bora pro DAL!
-            //Retorna a resposta do DAL! Se tiver dúvidas do que é esta resposta,
-            //analise o método do DAL!
-            return dal.Insert(item);
+            try
+            {
+                using (LocacaoDbContext ctx = new LocacaoDbContext())
+                {
+                    ctx.Clientes.Add(item);
+                    ctx.SaveChanges();
+                }
 
+            }
+            catch (Exception ex)
+            {
+                response.Erros.Add("Não foi possível cadastrar o cliente");
+            }
+
+            return response;
         }
         public Response Delete(int id)
         {

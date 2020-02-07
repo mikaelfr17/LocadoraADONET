@@ -12,7 +12,7 @@ namespace Entities
         public int ID { get; set; }
         public string Nome { get; set; }
         public DateTime DataLancamento { get; set; }
-        public Classificacao Classificacao { get; set; }
+        public virtual Classificacao Classificacao { get; set; }
         public int Duracao { get; set; }
         public int GeneroID { get; set; }
 
@@ -57,19 +57,5 @@ namespace Entities
             return 4;
         }
 
-        public Filme()
-        {
-
-        }
-
-        public Filme(int iD, string nome, DateTime dataLancamento, Classificacao classificacao, int duracao, int generoID)
-        {
-            ID = iD;
-            Nome = nome;
-            DataLancamento = dataLancamento;
-            Classificacao = classificacao;
-            Duracao = duracao;
-            GeneroID = generoID;
-        }
     }
 }
