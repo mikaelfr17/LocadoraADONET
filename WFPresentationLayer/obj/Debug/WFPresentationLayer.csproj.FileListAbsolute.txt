@@ -94,3 +94,7 @@ C:\Users\900194\source\repos\LocadoraADONET2\WFPresentationLayer\obj\Debug\WFPre
 C:\Users\900194\source\repos\LocadoraADONET2\WFPresentationLayer\obj\Debug\WFPresentationLayer.csproj.CopyComplete
 C:\Users\900194\source\repos\LocadoraADONET2\WFPresentationLayer\obj\Debug\WFPresentationLayer.exe
 C:\Users\900194\source\repos\LocadoraADONET2\WFPresentationLayer\obj\Debug\WFPresentationLayer.pdb
+C:\Users\900194\source\repos\LocadoraADONET2\WFPresentationLayer\bin\Debug\EntityFramework.dll
+C:\Users\900194\source\repos\LocadoraADONET2\WFPresentationLayer\bin\Debug\BusinessLogicalLayer.dll.config
+C:\Users\900194\source\repos\LocadoraADONET2\WFPresentationLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\900194\source\repos\LocadoraADONET2\WFPresentationLayer\bin\Debug\EntityFramework.xml

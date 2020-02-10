@@ -70,13 +70,13 @@ namespace BusinessLogicalLayer
 
         public DataResponse<FilmeResultSet> GetFilmesByClassificacao(Classificacao classificacao)
         {
-            DataResponse<Filme> response = new DataResponse<Filme>();
+            DataResponse<FilmeResultSet> response = new DataResponse<FilmeResultSet>();
 
             using (LocacaoDbContext ctx = new LocacaoDbContext())
             {
                 try
                 {
-                    ctx.Clientes.Find(classificacao);
+                    ctx.Filmes.Find(classificacao);
                     ctx.SaveChanges();
                 }
                 catch (Exception ex)

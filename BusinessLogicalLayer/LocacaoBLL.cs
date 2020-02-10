@@ -71,11 +71,11 @@ namespace BusinessLogicalLayer
             {
                 //Cadastra a locacao no banco de dados e ainda escreve
                 //no objeto locacao o ID gerado pelo base.
-                response = locacaoDAL.EfetuarLocacao(locacao);
+                response = EfetuarLocacao(locacao);
                 if (response.Sucesso)
                 {
                     //Efetuar as inserções na tabela N para N
-                    response = locacaoDAL.EfetuarLocacaoFilmes(locacao);
+                    response = EfetuarLocacao(locacao);
                     if (response.Sucesso)
                     {
                         //Se der certo, "commita" a operação.

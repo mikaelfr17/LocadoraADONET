@@ -77,7 +77,7 @@ namespace BusinessLogicalLayer
                 {
                     Genero g = new Genero();
                     g.ID = id;
-                    ctx.Entry<Cliente>(g).State = System.Data.Entity.EntityState.Deleted;
+                    ctx.Entry<Genero>(g).State = System.Data.Entity.EntityState.Deleted;
                     ctx.SaveChanges();
                 }
                 catch (Exception ex)
@@ -93,7 +93,25 @@ namespace BusinessLogicalLayer
 
         public DataResponse<Genero> GetData()
         {
-            return dal.GetData();
+            DataResponse<Genero> response = new DataResponse<Genero>();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    Cliente c = new Cliente();
+                    ctx.Generos.OrderBy(cli => cli.Nome);
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi encontrar o Gênero");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+            }
         }
 
         public DataResponse<Genero> GetByID(int id)
