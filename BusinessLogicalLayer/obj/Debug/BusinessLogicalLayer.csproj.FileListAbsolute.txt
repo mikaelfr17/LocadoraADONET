@@ -28,3 +28,6 @@ C:\Users\User\source\repos\XXXLocadora\BusinessLogicalLayer\obj\Debug\BusinessLo
 C:\Users\User\source\repos\XXXLocadora\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.csproj.CopyComplete
 C:\Users\User\source\repos\XXXLocadora\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.dll
 C:\Users\User\source\repos\XXXLocadora\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.pdb
+C:\Users\900194\source\repos\LocadoraADONET2\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.csprojAssemblyReference.cache
+C:\Users\900194\source\repos\LocadoraADONET2\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.dll
+C:\Users\900194\source\repos\LocadoraADONET2\BusinessLogicalLayer\obj\Debug\BusinessLogicalLayer.pdb

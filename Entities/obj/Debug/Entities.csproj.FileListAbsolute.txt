@@ -3,3 +3,8 @@ C:\Users\hbsis\source\repos\XXXLocadora\Entities\bin\Debug\Entities.pdb
 C:\Users\hbsis\source\repos\XXXLocadora\Entities\obj\Debug\Entities.csprojAssemblyReference.cache
 C:\Users\hbsis\source\repos\XXXLocadora\Entities\obj\Debug\Entities.dll
 C:\Users\hbsis\source\repos\XXXLocadora\Entities\obj\Debug\Entities.pdb
+C:\Users\900194\source\repos\LocadoraADONET2\Entities\bin\Debug\Entities.dll
+C:\Users\900194\source\repos\LocadoraADONET2\Entities\bin\Debug\Entities.pdb
+C:\Users\900194\source\repos\LocadoraADONET2\Entities\obj\Debug\Entities.csprojAssemblyReference.cache
+C:\Users\900194\source\repos\LocadoraADONET2\Entities\obj\Debug\Entities.dll
+C:\Users\900194\source\repos\LocadoraADONET2\Entities\obj\Debug\Entities.pdb

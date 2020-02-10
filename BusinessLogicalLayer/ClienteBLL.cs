@@ -41,12 +41,48 @@ namespace BusinessLogicalLayer
 
         public DataResponse<Cliente> GetByID(int id)
         {
-            throw new NotImplementedException();
+            DataResponse<Cliente> response = new DataResponse<Cliente>();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    Cliente c = new Cliente();
+                    ctx.Clientes.Find(id);
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi encontrar o cadastro do cliente");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+            }
         }
 
         public DataResponse<Cliente> GetData()
         {
-            throw new NotImplementedException();
+            DataResponse<Cliente> response = new DataResponse<Cliente>();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    Cliente c = new Cliente();
+                    ctx.Clientes.OrderBy(cli => cli.Nome);
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi encontrar o cadastro docliente");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+            }
         }
 
         public Response Insert(Cliente item)

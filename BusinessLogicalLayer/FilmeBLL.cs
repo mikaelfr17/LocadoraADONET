@@ -43,7 +43,24 @@ namespace BusinessLogicalLayer
 
         public DataResponse<Filme> GetData()
         {
-            throw new NotImplementedException();
+            DataResponse<Filme> response = new DataResponse<Filme>();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    ctx.Filmes.OrderBy(f => f.Nome);
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi encontrar o filme");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+            }
         }
 
         public DataResponse<FilmeResultSet> GetFilmes()
@@ -53,7 +70,24 @@ namespace BusinessLogicalLayer
 
         public DataResponse<FilmeResultSet> GetFilmesByClassificacao(Classificacao classificacao)
         {
-            throw new NotImplementedException();
+            DataResponse<Filme> response = new DataResponse<Filme>();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    ctx.Clientes.Find(classificacao);
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi encontrar o cadastro do cliente");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+            }
         }
 
         public DataResponse<FilmeResultSet> GetFilmesByGenero(int genero)

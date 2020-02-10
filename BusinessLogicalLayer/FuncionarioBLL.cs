@@ -14,22 +14,38 @@ namespace BusinessLogicalLayer
 
         public DataResponse<Funcionario> Autenticar(string email, string senha)
         {
+            DataResponse<Funcionario> response = new DataResponse<Funcionario>();
+
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    ctx.Funcionarios.Where(c => c.Email == email && c.Senha == senha);
+                    ctx.SaveChanges();
+
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Usuario ou senha invalidos!!");
+                    response.Sucesso = false;
+                    return response;
+                }
+                senha = HashUtils.HashPassword(senha);
+
+                if (response.Sucesso)
+                {
+                    User.FuncionarioLogado = response.Data[0];
+                }
+                return response;
+
+            }
             //TODO: Validar email e Senha! As implementações não serão feitas 
             //pq a gente já viu isso 
             //999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
             //999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
             //999999999999999999999999999999999999999999999999999999999999999999 vezes
-
             //Após validar, caso esteja tudo fofinho e pronto pra funcionar, chama o banco!
-
-            senha = HashUtils.HashPassword(senha);
-
-            DataResponse<Funcionario> response = funcionarioDAL.Autenticar(email, senha);
-            if (response.Sucesso)
-            {
-                User.FuncionarioLogado = response.Data[0];
-            }
-            return response;
         }//VERIFICAR MAIS TARDE
 
         public Response Delete(int id)
@@ -58,12 +74,47 @@ namespace BusinessLogicalLayer
 
         public DataResponse<Funcionario> GetByID(int id)
         {
-            return funcionarioDAL.GetByID(id);
+            DataResponse<Funcionario> response = new DataResponse<Funcionario>();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    Cliente c = new Cliente();
+                    ctx.Funcionarios.Find(id);
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi encontrar o cadastro do funcionario");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+            }
         }
 
         public DataResponse<Funcionario> GetData()
         {
-            return funcionarioDAL.GetData();
+            DataResponse<Funcionario> response = new DataResponse<Funcionario>();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    ctx.Funcionarios.OrderBy(cli => cli.Nome);
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi encontrar o cadastro do Funcionário");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+            }
         }
 
         public Response Insert(Funcionario item)

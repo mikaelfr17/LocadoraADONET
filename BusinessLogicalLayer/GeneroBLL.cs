@@ -98,7 +98,25 @@ namespace BusinessLogicalLayer
 
         public DataResponse<Genero> GetByID(int id)
         {
-            return dal.GetByID(id);
+            DataResponse<Genero> response = new DataResponse<Genero>();
+
+            using (LocacaoDbContext ctx = new LocacaoDbContext())
+            {
+                try
+                {
+                    Cliente c = new Cliente();
+                    ctx.Generos.Find(id);
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Erros.Add("Não foi encontrar o genero");
+                    response.Sucesso = false;
+                    return response;
+                }
+                response.Sucesso = true;
+                return response;
+            }
         }
         private Response Validate(Genero item)
         {

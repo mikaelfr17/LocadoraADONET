@@ -22,3 +22,16 @@ C:\Users\User\source\repos\XXXLocadora\DataAccessLayer\obj\Debug\DataAccessLayer
 C:\Users\User\source\repos\XXXLocadora\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
 C:\Users\User\source\repos\XXXLocadora\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 C:\Users\User\source\repos\XXXLocadora\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\Entities.dll
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\Entities.pdb
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\obj\Debug\DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\900194\source\repos\LocadoraADONET2\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
